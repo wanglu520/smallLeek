@@ -4,7 +4,7 @@
 ## 功能
 实时更新基金估算净值和计算收益
 ### smallLeek实例
-![二维码](./src/static/QRcode/smallLeek.png)
+![二维码](src/static/QRcode/smallLeek.png)
 
 ## 技术栈
 > 1、vue
