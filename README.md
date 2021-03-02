@@ -4,7 +4,7 @@
 ## 功能
 实时更新基金估算净值和计算收益
 ### smallLeek实例
-![](./src/static/QRcode/smallLeek.png)
+![二维码](./src/static/QRcode/smallLeek.png)
 
 ## 技术栈
 > 1、vue
@@ -16,7 +16,7 @@
 ### 环境安装
 #### 全局安装vue-cli
  * npm install -g @vue/cli
-####创建uni-app
+#### 创建uni-app
  * vue create -p dcloudio/uni-preset-vue my-project
 此时，会提示选择项目模板，选择默认模板
 #### 运行
