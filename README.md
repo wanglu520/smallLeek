@@ -4,8 +4,8 @@
 ## 功能
 实时更新基金估算净值和计算收益
 ### smallLeek实例
-![二维码](src/static/QRcode/smallLeek.png)
-
+![我的韭菜助手](./src/static/QRcode/smallLeek.png)
+微信搜索小程序：我的韭菜助手
 ## 技术栈
 > 1、vue
 > 2、uni-app
