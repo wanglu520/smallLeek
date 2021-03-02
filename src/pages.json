@@ -1,0 +1,70 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "韭菜助手",
+				"enablePullDownRefresh": true
+			}
+		}
+	    ,{
+            "path" : "pages/index/set/set",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/index/set/test",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/index/set/addFund",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "编辑",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/index/set/batchAddFund",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "批量导入",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+			"color":"#8a8a8a",
+			"selectedColor":"#0085d0",
+			"borderStyle":"black",
+			"backgroundColor":"#ffffff",
+			"list": [
+				{
+					"pagePath":"pages/index/index",
+					"text":"首页",
+					"iconPath":"static/union.png",
+					"selectedIconPath":"static/union_sel.png"
+				},
+				{
+					"pagePath":"pages/index/set/set",
+					"text":"设置",
+					"iconPath":"static/shezhi.png",
+					"selectedIconPath":"static/shezhi_sel.png"
+				}
+			]	
+		 }
+}
