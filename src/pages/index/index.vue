@@ -37,7 +37,7 @@
 						@touchstart="drawStart" 
 						@touchmove="drawMove" 
 						@touchend="drawEnd" 
-						@click="fundEdit(myFund)"
+						@click.stop="fundEdit(myFund)"
 						:style="{ right: myFund.right + 'rpx' }">
 						<view class="uni-flex">
 							<view class="fund-name">{{myFund.name}}({{myFund.fundcode}})</view>
@@ -70,6 +70,19 @@
 			</view>
 		</view>
 		<!-- 悬浮 -->
+		<view :class="uniClass">
+			<uni-fab
+				ref="fab"
+				:pattern="pattern"
+				:content="content"
+				horizontal="right"
+				vertical="bottom"
+				direction="horizontal"
+				popMenu="true"
+				@trigger="trigger"
+				@fabClick.stop="fabClick"
+			></uni-fab>
+		</view>
 	</view>
 </template>
 
@@ -79,6 +92,28 @@
 	export default {
 	    data() {
 	        return {
+				uniClass:"uni-transparent",
+				pattern: {
+						color: 'gray',
+						backgroundColor: '#FFFFFF',
+						selectedColor: 'rgba(0, 122, 255, 0.3)',
+						buttonColor:'rgba(0, 122, 255, 0.3)'
+					},
+
+				content: [
+							{
+								iconPath: '/static/icon_jia.png',
+								selectedIconPath: '/static/icon_jia.png',
+								text: '添加',
+								active: false
+							},
+							{
+								iconPath: '/static/icon_paixu.png',
+								selectedIconPath: '/static/icon_paixu.png',
+								text: '排序',
+								active: false
+							}
+						],
 				iconsType:"eye-filled",
 				totalAmount:0,
 				totalCost:0,
@@ -103,6 +138,34 @@
 			uniIcons
 		},
 	    methods: {
+			trigger(e){
+				this.$refs.fab.close();
+				this.uniClass = "uni-transparent";
+				let that = this;
+				if(e.item.text === "添加"){
+					this.navigateTo("./set/addFund");
+				}else if(e.item.text === "排序"){
+					this.navigateTo("./set/fundSort",function(res){
+						// 通过eventChannel向被打开页面传送数据
+						res.eventChannel.emit('fundInfo', that.funds)
+					})
+				}
+			},
+			fabClick(){
+				this.covTransparent();
+				console.log("fabClick");
+			},
+			covTransparent(){
+				this.uniClass = this.uniClass === "uni-opaque" ? "uni-transparent" : "uni-opaque"
+			},
+			navigateTo(url, success=function(){}){
+				uni.navigateTo({
+				    url: url,
+					animationType:"pop-in",
+					animationDuration:200,
+					success
+				});
+			},
 			delItem(){
 				let that = this;
 				let cachTemp = uni.getStorageSync("fund_key");
@@ -124,17 +187,17 @@
 			},
 			drawStart: function(e) {
 			    // console.log("drawStart");
-			    var touch = e.touches[0];
-			    for (var index in this.funds) {
+			    let touch = e.touches[0];
+			    for (let index in this.funds) {
 			        this.funds[index].right = 0;
 			    }
 			    this.startX = touch.clientX;
 			},
 			drawMove: function(e) {
-			    var touch = e.touches[0];
+			    let touch = e.touches[0];
 				this.index = e.currentTarget.dataset.index;
-			    var item = this.funds[this.index];
-			    var disX = this.startX - touch.clientX;
+			    let item = this.funds[this.index];
+			    let disX = this.startX - touch.clientX;
 			
 			    if (disX >= 35) {
 			        if (disX > this.delBtnWidth) {
@@ -148,7 +211,7 @@
 			    }
 			},
 			drawEnd: function(e) {
-			    var item = this.funds[e.currentTarget.dataset.index];
+			    let item = this.funds[e.currentTarget.dataset.index];
 			    if (item.right >= this.delBtnWidth / 2) {
 			        this.isScroll = true;
 			        this.funds[e.currentTarget.dataset.index].right = this.delBtnWidth;
@@ -176,6 +239,8 @@
 				this.dayAmountYield = 0;
 			},
 			fundEdit(item){//编辑
+				this.$refs.fab.close();
+				this.uniClass = "uni-transparent";
 				uni.navigateTo({
 					url:"./set/addFund",
 					events:{
@@ -418,5 +483,17 @@
 		border:4rpx solid;
 		border-color: red;
 		border-radius: 20rpx;
+	}
+	.uni-transparent .uni-fab view{
+		opacity: 0.3;
+	}
+	.uni-transparent .uni-fab__circle view{
+		opacity: 0.3;
+	}
+	.uni-opaque .uni-fab view{
+		opacity: 1;
+	}
+	.uni-opaque .uni-fab__circle view{
+		opacity: 1;
 	}
 </style>
